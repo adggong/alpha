@@ -99,7 +99,7 @@ HTML = """
             {% set percent = 0 if percent < 0 else (100 if percent > 100 else percent) %}
 
             <p class="next">🎯 다음 포인트({{ next_tier[1] }}점)까지 남은 거래액: ${{ "{:,.2f}".format(needed) }} 
-            (**절반: ${{ "{:,.2f}".format(needed / 2) }}**)</p>
+            (스왑 USDT: ${{ "{:,.2f}".format(needed / 2) }})</p>
 
             <div class="progress-container">
                 <div class="progress-bar" style="width: {{ "{:.1f}".format(percent) }}%;">
