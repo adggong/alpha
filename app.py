@@ -20,10 +20,10 @@ def fetch_usdt_volume(address):
 
     total = 0
     if data.get("status") == "1":
-        kst = pytz.timezone("Asia/Seoul")
-        now = datetime.now(kst)
-        today9am = kst.localize(datetime(now.year, now.month, now.day, 9, 0, 0))
-        start_ts = int(today9am.timestamp())
+        utc = pytz.UTC
+        now = datetime.now(utc)
+        today0 = datetime(now.year, now.month, now.day, 0, 0, 0, tzinfo=utc)
+        start_ts = int(today0.timestamp())
         end_ts = start_ts + 86400
 
         for tx in data["result"]:
@@ -36,6 +36,7 @@ def fetch_usdt_volume(address):
             total += amount
 
     return round(total, 2)
+
 
 def get_alpha_point(amount):
     point = 0
@@ -85,7 +86,7 @@ HTML = """
     </style>
 </head>
 <body>
-    <h2>🪙 adggong.com 제공 BSC 지갑의 USDT 거래량 (KST 오전 9시 기준 24시간)</h2>
+    <h2>🪙 adggong.com 제공 BSC 지갑의 USDT 거래량 (UTC 오전 0시 기준 24시간)</h2>
     <form method="GET">
         지갑 주소: <input type="text" name="address" required value="{{ address or '' }}">
         <button type="submit">조회</button>
